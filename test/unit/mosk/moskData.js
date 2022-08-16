@@ -25,9 +25,9 @@ const getMockCheckout = (n) => {
 
 const getMockCart = (id) => ({
   [id]: {
-    name: "Товары",
-    price: 212 * (id + 1),
-    count: 5,
+    name: `Товар для теста ${id}`,
+    price: Math.floor(Math.random() * 100) + id,
+    count: 2,
   },
 });
 

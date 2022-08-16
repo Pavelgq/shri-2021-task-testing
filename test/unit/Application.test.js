@@ -1,95 +1,75 @@
 // import { shallow, mount, render } from "enzyme";
+import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+// import events from "@testing-library/user-event";
+// import { render } from "@testing-library/react";
+
 import { AppForTest } from "./mosk/AppForTest";
 
-describe("Переходы по адресу", () => {
-  it('Путь /catalog открывается страница "Catalog"', () => {
+describe("Проверка наличия страниц", () => {
+  it('При переходе /catalog открывается страница "Catalog"', () => {
     render(<AppForTest path="/catalog" />);
     screen.getByRole("heading", { name: /Catalog/i, level: 1 });
   });
 
-  it('/delivery открывается страница "Delivery"', () => {
+  it('При переходе /delivery открывается страница "Delivery"', () => {
     render(<AppForTest path="/delivery" />);
     screen.getByRole("heading", { name: /Delivery/i, level: 1 });
   });
 
-  it('/contacts открывается страница "Contacts"', () => {
+  it('При переходе /contacts открывается страница "Contacts"', () => {
     render(<AppForTest path="/contacts" />);
     screen.getByRole("heading", { name: /Contacts/i, level: 1 });
   });
 
-  it('/cart открывается страница "Shopping cart"', () => {
+  it('При переходе /cart открывается страница "Shopping cart"', () => {
     render(<AppForTest path="/cart" />);
     screen.getByRole("heading", { name: /Shopping cart/i, level: 1 });
   });
 });
 
-describe("Ссылки в шапке ", () => {
-  it("Ссылка на главную страницу соответствуют назначению", async () => {
-    const { container } = render(<AppForTest path="/" />);
-    const elLinkInHeader = !!container.querySelector(
-      ".navbar a.Application-Brand"
-    );
+describe("Общие требования: в шапке отображаются ссылки ", () => {
+  beforeEach(() => {
+    render(<AppForTest path="/" />);
+  });
+  it("Отображается ссылка на главную страницу", async () => {
+    const link = screen.getByRole("link", { name: /example store/i });
 
-    expect(elLinkInHeader).toBeTruthy();
+    expect(link).toBeDefined();
   });
 
-  it("Ссылка на страницу каталога соответствуют назначению", () => {
-    const { container } = render(<AppForTest path="/" />);
-    const elLinkInHeader = !!container.querySelector(
-      ".navbar a.nav-link[href$=catalog]"
-    );
+  it("Отображается ссылка на страницу каталога", () => {
+    const link = screen.getByRole("link", { name: /catalog/i });
 
-    expect(elLinkInHeader).toBeTruthy();
+    expect(link).toBeDefined();
   });
 
-  it("Ссылка на страницу доставки соответствуют назначению", () => {
-    const { container } = render(<AppForTest path="/" />);
-    const elLinkInHeader = !!container.querySelector(
-      ".navbar a.nav-link[href$=delivery]"
-    );
+  it("Отображается ссылка на страницу доставки", () => {
+    const link = screen.getByRole("link", { name: /delivery/i });
 
-    expect(elLinkInHeader).toBeTruthy();
+    expect(link).toBeDefined();
   });
 
-  it("Ссылка на страницу контантов соответствуют назначению", () => {
-    const { container } = render(<AppForTest path="/" />);
-    const elLinkInHeader = !!container.querySelector(
-      ".navbar a.nav-link[href$=contacts]"
-    );
+  it("Отображается ссылка на страницу контантов", () => {
+    const link = screen.getByRole("link", { name: /contacts/i });
 
-    expect(elLinkInHeader).toBeTruthy();
+    expect(link).toBeDefined();
   });
 
-  it("Ссылка на корзину товара соответствуют назначению", () => {
-    const { container } = render(<AppForTest path="/" />);
-    const elLinkInHeader = !!container.querySelector(
-      ".navbar a.nav-link[href$=cart]"
-    );
+  it("Отображается ссылка на корзину товара", () => {
+    const link = screen.getByRole("link", { name: /cart/i });
 
-    expect(elLinkInHeader).toBeTruthy();
+    expect(link).toBeDefined();
   });
 });
 
-describe("Другие требования", () => {
-  it('при выборе элемента из меню "гамбургера", меню должно закрываться', async () => {
-    const { container } = render(<AppForTest path="/" />);
-
-    await events.click(screen.getByRole("link", { name: /delivery/i }));
-
-    const isClosedMobileMenu = !!container.querySelector(
-      ".navbar-collapse.collapse"
-    );
-
-    expect(isClosedMobileMenu).toBeTruthy();
-  });
-
+describe("Прочие требования", () => {
   it("название магазина в шапке должно быть ссылкой на главную страницу", async () => {
-    const { container } = render(<AppForTest path="/delivery" />);
+    const { container } = render(<AppForTest path="/cart" />);
 
-    await events.click(screen.getByRole("link", { name: /example store/i }));
+    await fireEvent.click(screen.getByRole("link", { name: /example store/i }));
 
-    const issetElHome = !!container.querySelector(".Home");
-
-    expect(issetElHome).toBeTruthy();
+    const homeElement = screen.getByText(/Welcome to Example store/i);
+    expect(homeElement).toBeDefined();
   });
 });

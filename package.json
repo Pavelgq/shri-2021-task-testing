@@ -6,7 +6,7 @@
         "test": "jest",
         "build": "webpack --mode=production --node-env=production",
         "watch": "webpack --watch",
-        "hermione": "hermione gui test/hermione/*.hermione.js"
+        "hermione": "hermione test/hermione/*.hermione.js"
     },
     "dependencies": {
         "@bem-react/classname": "^1.5.12",
@@ -30,6 +30,9 @@
         "@babel/plugin-syntax-jsx": "^7.18.6",
         "@babel/preset-env": "^7.18.10",
         "@babel/preset-react": "^7.18.6",
+        "@testing-library/jest-dom": "^5.16.5",
+        "@testing-library/react": "^12.1.2",
+        "@testing-library/user-event": "^13.5.0",
         "@types/express": "^4.17.13",
         "@types/faker": "^5.5.9",
         "@types/mini-css-extract-plugin": "^2.3.0",

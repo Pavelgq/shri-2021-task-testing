@@ -42,13 +42,21 @@ describe("Пользовательские сценарии", async function () 
     await wait(200);
 
     const isDisplayed = await browser.$(".Cart-Table").isDisplayed();
-    console.log(isDisplayed);
     expect(isDisplayed).to.equal(true);
 
     await browser.$(".Cart-Clear").click();
   });
 
-  it("", async function () {});
-  it("", async function () {});
-  it("", async function () {});
+    // it('При выборе элемента из меню "гамбургера", меню должно закрываться', async () => {
+    //   //Сфоткал, открыл меню, выбрал элемент, сфоткал
+    //   const { container } = render(<AppForTest path="/" />);
+
+    //   await fireEvent.click(screen.getByRole("link", { name: /delivery/i }));
+
+    //   const isClosedMobileMenu = !!container.querySelector(
+    //     ".navbar-collapse.collapse"
+    //   );
+
+    //   expect(isClosedMobileMenu).toBeTruthy();
+    // });
 });

@@ -1,8 +1,14 @@
 module.exports = {
+  sets: {
+    common: {
+      files: "test/hermione/*.hermione.js",
+    },
+  },
   baseUrl: "http://localhost:3000",
   // baseUrl: "https://yandex.ru",
   gridUrl: "http://192.168.0.8:4444/wd/hub",
-
+  sessionsPerBrowser: 1,
+  testsPerSession: 1,
   browsers: {
     chrome: {
       desiredCapabilities: {

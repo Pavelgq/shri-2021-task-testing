@@ -1,3 +1,4 @@
+import React from "react";
 import { MockApi } from "./moskApi";
 import { CartApi } from "../../../src/client/api";
 import { initStore } from "../../../src/client/store";
